@@ -1,10 +1,12 @@
 # TryHackMe: Fools Mate — Walkthrough
 
-**Author:** Muhammad Afif Hidayatullah (FloraLumi)  
+References
+https://dhruvrajsinh8.github.io/WRITEUP-CTF/foolsmate/
+
 **Platform:** TryHackMe  
-**Room URL:** `https://tryhackme.com/room/foolsmate`  
-**Category:** Web / Client-Side Security  
-**Difficulty:** Easy  
+**Room URL:** https://tryhackme.com/room/
+
+**Difficulty:** Easy
 
 ---
 
@@ -12,7 +14,7 @@
 
 - **Room Name:** Fools Mate
 - **Target IP:** `10.48.158.161`
-- **Application:** EndgameTrainer (Node.js Express Web Application)
+- **Application:** EndgameTrainer (Node.js)
 - **Objective:** Identify why the web application prevents playing the winning checkmate move, bypass the client-side restriction, and retrieve the flag.
 
 **Room Overview**  
@@ -24,8 +26,8 @@
 
 1. **Reconnaissance:** Identifying open ports and running services using `nmap`.
 2. **Web Enumeration:** Inspecting the `EndgameTrainer` web application interface and testing the puzzle solution (`Ra8#`).
-3. **Client-Side Source Code Analysis:** Reviewing frontend JavaScript files via Firefox Developer Tools (`Debugger`) to locate the move validation logic.
-4. **Exploitation (Client-Side Bypass):** Using a conditional breakpoint in the Firefox Debugger to neutralize the client-side checkmate restriction, execute `Ra8#`, and reveal the flag.
+4. **Client-Side Source Code Analysis:** Reviewing frontend JavaScript files via Firefox Developer Tools (`Debugger`) to locate the move validation logic.
+5. **Exploitation (Client-Side Bypass):** Using a conditional breakpoint in the Firefox Debugger to neutralize the client-side checkmate restriction, execute `Ra8#`, and reveal the flag.
 
 ---
 
@@ -57,13 +59,13 @@ Navigating to `http://10.48.158.161` in Firefox loads **EndgameTrainer**, a ches
 * **Black:** King on `g8`, Pawns on `f7`, `g7`, `h7`
 
 <!-- SCREENSHOT 3: Initial EndgameTrainer chessboard at http://10.48.158.161 -->
-[Initial Board]
+Initial Board
 <img width="940" height="624" alt="image" src="https://github.com/user-attachments/assets/604fd1d6-c727-4d3d-86f4-18e1c26d2158" />
 
 The winning move is a classic back-rank checkmate: **Ra8#** (sliding the White Rook from `a1` to `a8`). However, dragging the rook to `a8` triggers a fake system warning dialog (`"I'll shut down your PC if you play that."`) and prevents the move from registering.
 
 <!-- SCREENSHOT 4: Fake error dialog "I'll shut down your PC if you play that." -->
-[Blocked Move Notice]
+Blocked Move Notice
 
 <img width="711" height="356" alt="image" src="https://github.com/user-attachments/assets/6ecaaa0d-68a0-4712-80d4-b2466eb37c8f" />
 
